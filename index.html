@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MediNow — Book Your Clinic Appointment</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo" onclick="scrollTo(0,0)">Medi<span>Now</span></div>
+    <div class="nav-links">
+      <a onclick="scrollToSection('clinics')">Clinics</a>
+      <a onclick="scrollToSection('how')">How It Works</a>
+      <a onclick="openProfileModal()">My Profile</a>
+      <button class="nav-cta" onclick="openProfileModal()">Create Account</button>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge">DAVAO'S TRUSTED CLINIC NETWORK</div>
+      <h1>Healthcare,<br><em>right when</em><br>you need it.</h1>
+      <p>Book appointments across top clinics in the city — instantly, without the wait. Choose your doctor, pick your time, and show up ready.</p>
+      <div class="hero-btns">
+        <button class="btn-primary" onclick="scrollToSection('clinics')">Book an Appointment</button>
+        <button class="btn-secondary" onclick="openProfileModal()">Create Profile</button>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-header">
+          <div class="clinic-avatar">🏥</div>
+          <div class="clinic-info">
+            <h4>MindCare Psychiatric Center</h4>
+            <p>Mental Health · Davao City</p>
+          </div>
+          <div class="badge-avail">Open</div>
+        </div>
+        <div class="slot-label">Available Today</div>
+        <div class="slots">
+          <div class="slot">9:00 AM</div>
+          <div class="slot active">10:30 AM</div>
+          <div class="slot">1:00 PM</div>
+          <div class="slot">3:30 PM</div>
+        </div>
+        <div class="divider"></div>
+        <div class="mini-stats">
+          <div class="mini-stat"><div class="mini-stat-num">12</div><div class="mini-stat-lbl">Clinics</div></div>
+          <div class="mini-stat"><div class="mini-stat-num">48</div><div class="mini-stat-lbl">Doctors</div></div>
+          <div class="mini-stat"><div class="mini-stat-num">4.9★</div><div class="mini-stat-lbl">Rating</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="clinics">
+    <div class="clinics-header">
+      <div>
+        <div class="section-tag">Partner Clinics</div>
+        <div class="section-title">Find the right<br>specialist for you</div>
+      </div>
+      <div class="filter-row">
+        <button class="filter-btn active" onclick="filterClinics('All', this)">All</button>
+        <button class="filter-btn" onclick="filterClinics('General', this)">General</button>
+        <button class="filter-btn" onclick="filterClinics('Dental', this)">Dental</button>
+        <button class="filter-btn" onclick="filterClinics('Pediatrics', this)">Pediatrics</button>
+        <button class="filter-btn" onclick="filterClinics('Mental Health', this)">Mental Health</button>
+        <button class="filter-btn" onclick="filterClinics('Eye Care', this)">Eye Care</button>
+      </div>
+    </div>
+    <div class="clinics-grid" id="clinicsGrid"></div>
+  </section>
+
+  <section id="how">
+    <div class="section-tag" style="color:var(--mint)">Simple Process</div>
+    <div class="section-title">Ready in 3 easy steps</div>
+    <div class="section-sub">No more phone calls or waiting in line. MediNow gets you connected to a doctor in minutes.</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-icon">👤</div>
+        <h4>Create Your Profile</h4>
+        <p>Sign up with your basic health details and personal information to get started in seconds.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-icon">🔍</div>
+        <h4>Browse Clinics</h4>
+        <p>Explore our network of trusted clinics and specialists. Filter by specialty to find the perfect match.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-icon">📅</div>
+        <h4>Book &amp; Confirm</h4>
+        <p>Choose your preferred date and time slot. Receive an instant confirmation and reminder.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-icon">🩺</div>
+        <h4>See Your Doctor</h4>
+        <p>Arrive at the clinic with your reference code. Skip the queue and walk in on time.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div>
+      <div class="logo">Medi<span>Now</span></div>
+      <p style="margin-top:6px;">Connecting you to better healthcare.</p>
+    </div>
+    <p>© 2026 MediNow · Davao City, Philippines</p>
+  </footer>
+
+  <div class="overlay" id="profileOverlay" onclick="closeOnBg(event, 'profileOverlay')">
+    <div class="modal" id="profileModal">
+      <button class="modal-close" onclick="closeModal('profileOverlay')">✕</button>
+      <h2>Welcome to MediNow</h2>
+      <p class="sub" id="authSub">
+        Already have an account? <a onclick="switchTab('login')">Log in</a>
+      </p>
+
+      <div class="tab-row">
+        <button class="tab active" id="tabSignup" onclick="switchTab('signup')">Create Account</button>
+        <button class="tab"        id="tabLogin"  onclick="switchTab('login')">Log In</button>
+      </div>
+
+      
+      <div id="signupForm">
+        <div class="form-row">
+          <div class="form-group"><label>First Name</label><input type="text" placeholder="Juan"      id="reg-fname"></div>
+          <div class="form-group"><label>Last Name</label> <input type="text" placeholder="Dela Cruz" id="reg-lname"></div>
+        </div>
+        <div class="form-group"><label>Email Address</label><input type="email" placeholder="juan@email.com" id="reg-email"></div>
+        <div class="form-group"><label>Phone Number</label> <input type="tel"   placeholder="09XX XXX XXXX" id="reg-phone"></div>
+        <div class="form-row">
+          <div class="form-group"><label>Date of Birth</label><input type="date" id="reg-dob"></div>
+          <div class="form-group"><label>Sex</label>
+            <select id="reg-sex">
+              <option value="">Select</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Prefer not to say</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label>Blood Type</label>
+          <select id="reg-blood">
+            <option value="">Select</option>
+            <option>A+</option><option>A-</option>
+            <option>B+</option><option>B-</option>
+            <option>AB+</option><option>AB-</option>
+            <option>O+</option><option>O-</option>
+            <option>Unknown</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Password</label><input type="password" placeholder="Create a strong password" id="reg-pass"></div>
+        <button class="form-submit" onclick="registerUser()">Create My Profile →</button>
+      </div>
+
+      <!-- Login form -->
+      <div id="loginForm" style="display:none">
+        <div class="form-group"><label>Email Address</label><input type="email"    placeholder="juan@email.com" id="log-email"></div>
+        <div class="form-group"><label>Password</label>      <input type="password" placeholder="Your password"   id="log-pass"></div>
+        <button class="form-submit" onclick="loginUser()">Log In →</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay" id="apptOverlay" onclick="closeOnBg(event, 'apptOverlay')">
+    <div class="modal" id="apptModal">
+      <button class="modal-close" onclick="closeModal('apptOverlay')">✕</button>
+
+    
+      <div id="apptContent">
+        <h2>Book Appointment</h2>
+        <p class="sub">Fill in your details to confirm the booking.</p>
+
+        <div class="appt-clinic-info" id="apptClinicInfo"></div>
+
+        <div class="form-group"><label>Full Name</label><input type="text" placeholder="Juan Dela Cruz" id="appt-name"></div>
+        <div class="form-row">
+          <div class="form-group"><label>Date</label><input type="date" id="appt-date"></div>
+          <div class="form-group"><label>Concern / Reason</label>
+            <select id="appt-reason">
+              <option value="">Select</option>
+              <option>General Check-up</option>
+              <option>Follow-up</option>
+              <option>Consultation</option>
+              <option>Emergency</option>
+              <option>Vaccination</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Preferred Time</label>
+          <div class="time-grid" id="timeGrid"></div>
+        </div>
+
+        <div class="form-group">
+          <label>Notes (optional)</label>
+          <textarea rows="3" placeholder="Any symptoms or concerns you'd like the doctor to know..." id="appt-notes" style="resize:vertical;"></textarea>
+        </div>
+
+        <button class="form-submit" onclick="confirmAppointment()">Confirm Appointment →</button>
+      </div>
+
+    
+      <div id="apptSuccess" style="display:none" class="success-screen">
+        <div class="success-icon">✓</div>
+        <h3>Appointment Confirmed!</h3>
+        <p>Your booking is set. Please arrive 10 minutes before your scheduled time and present this code:</p>
+        <div class="ref-code" id="refCode"></div>
+        <p style="margin-top:8px;">A confirmation has been saved to your profile.</p>
+        <button class="form-submit" style="margin-top:24px;" onclick="closeModal('apptOverlay')">Done</button>
+      </div>
+    </div>
+  </div>
+
+ 
+  <div class="toast" id="toast"></div>
+
+
+  <script src="app.js"></script>
+
+</body>
+</html>
